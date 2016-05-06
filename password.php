@@ -8,8 +8,8 @@ if ( !empty( $_POST ) ) {
   extract( $_POST );
   $erreur = [];
 
-  include 'functions/password_ok.php';
-  include 'functions/password_format.php';
+  require 'functions/password_ok.php';
+  require 'functions/password_format.php';
 
   if ( empty( $oldpassword ) ) {
     $erreur['oldpassword'] = 'Ancien mot de passe manquant';
@@ -33,7 +33,7 @@ if ( !empty( $_POST ) ) {
   }
 
   if ( !$erreur ) {
-    include 'functions/password_save.php';
+    require 'functions/password_save.php';
 
     password_save();
 
@@ -51,7 +51,7 @@ if ( !empty( $_POST ) ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php include 'header.php'; ?>
+    <?php require 'header.php'; ?>
     <div class="container profil">
       <h1 class="text-xs-center">Changer de mot de passe</h1>
       <div class="row">

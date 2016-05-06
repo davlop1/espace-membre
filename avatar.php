@@ -37,7 +37,7 @@ if ( isset( $_FILES['avatar'] ) && $_FILES['avatar']['error'] == 0 ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php include 'header.php'; ?>
+    <?php require 'header.php'; ?>
     <div class="container profil">
       <div class="row">
         <div class="col-xl-4 col-xl-offset-4 col-md-6 col-md-offset-3">

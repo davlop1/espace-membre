@@ -7,7 +7,7 @@ if ( isset( $_SESSION['id'] ) ) {
 if ( !empty( $_POST ) ) {
   extract( $_POST );
 
-  include 'functions/mail_free.php';
+  require 'functions/mail_free.php';
 
   if ( empty( $email ) ) {
     $erreur = 'Adresse e-mail manquante';
@@ -20,8 +20,8 @@ if ( !empty( $_POST ) ) {
   }
 
   if ( !isset( $erreur ) ) {
-    include 'functions/password_save.php';
-    include 'functions/mail_html.php';
+    require 'functions/password_save.php';
+    require 'functions/mail_html.php';
 
     $password = bin2hex( random_bytes( 8 ) );
 
@@ -46,7 +46,7 @@ if ( !empty( $_POST ) ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php include 'header.php'; ?>
+    <?php require 'header.php'; ?>
     <div class="container">
       <h1 class="text-xs-center">Mot de passe oublié</h1>
       <div class="row">

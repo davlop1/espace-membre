@@ -7,10 +7,10 @@ if ( isset( $_SESSION['id'] ) ) {
 if ( !empty( $_POST ) ) {
   extract( $_POST );
 
-  include 'functions/account_exists.php';
+  require 'functions/account_exists.php';
 
   if ( account_exists() ) {
-    include 'functions/account_informations.php';
+    require 'functions/account_informations.php';
 
     $membre = account_informations();
     $_SESSION['id'] = $membre['id'];
@@ -32,7 +32,7 @@ if ( !empty( $_POST ) ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php include 'header.php'; ?>
+    <?php require 'header.php'; ?>
     <div class="container">
       <h1 class="text-xs-center">Connexion</h1>
       <div class="row">

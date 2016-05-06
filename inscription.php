@@ -8,8 +8,8 @@ if ( !empty( $_POST ) ) {
   extract( $_POST );
   $erreur = [];
 
-  include 'functions/mail_free.php';
-  include 'functions/password_format.php';
+  require 'functions/mail_free.php';
+  require 'functions/password_format.php';
 
   if ( empty( $email ) ) {
     $erreur['email'] = 'Adresse e-mail manquante';
@@ -53,7 +53,7 @@ if ( !empty( $_POST ) ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php include 'header.php'; ?>
+    <?php require 'header.php'; ?>
     <div class="container">
       <h1 class="text-xs-center">Inscription</h1>
       <div class="row">
