@@ -11,7 +11,7 @@ session_start();
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php require 'header.php'; ?>
+    <?php require_once 'inc/header.php'; ?>
     <div class="container">
       <h1>Ma page d'accueil</h1>
     </div>

@@ -14,7 +14,7 @@ if ( !isset( $_SESSION['id'] ) ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php require 'header.php'; ?>
+    <?php require_once 'inc/header.php'; ?>
     <div class="container profil">
       <h1>Mon compte</h1>
       <a href="avatar.php" class="btn btn-success">Changer mon image de profil</a>

@@ -8,8 +8,7 @@ if ( !empty( $_POST ) ) {
   extract( $_POST );
   $erreur = [];
 
-  require 'functions/mail_free.php';
-  require 'functions/password_format.php';
+  require_once 'inc/functions.php';
 
   if ( empty( $email ) ) {
     $erreur['email'] = 'Adresse e-mail manquante';
@@ -24,8 +23,8 @@ if ( !empty( $_POST ) ) {
   if ( empty( $password ) ) {
     $erreur['password'] = 'Mot de passe manquant';
   }
-  elseif ( !password_format() ) {
-    $erreur['password'] = 'Le mot de passe doit faire au moins 8 caractères et contenir des lettres et chiffres';
+  elseif ( strlen( $password ) < 8 ) {
+    $erreur['password'] = 'Le mot de passe doit faire au moins 8 caractères';
   }
 
   if ( empty( $passwordconf ) ) {
@@ -36,9 +35,13 @@ if ( !empty( $_POST ) ) {
   }
 
   if ( !$erreur ) {
-    // On procède à l'inscription du visiteur
+    bdd_insert( 'INSERT INTO membre ( mail, password ) VALUES ( :mail, :password )', [
+      'mail' => htmlspecialchars( $email ),
+      'password' => password_hash( $password, PASSWORD_DEFAULT )
+    ] );
 
     unset( $email );
+
     $validation = 'Inscription réussie !';
   }
 }
@@ -53,7 +56,7 @@ if ( !empty( $_POST ) ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php require 'header.php'; ?>
+    <?php require_once 'inc/header.php'; ?>
     <div class="container">
       <h1 class="text-xs-center">Inscription</h1>
       <div class="row">

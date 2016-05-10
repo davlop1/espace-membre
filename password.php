@@ -8,8 +8,7 @@ if ( !empty( $_POST ) ) {
   extract( $_POST );
   $erreur = [];
 
-  require 'functions/password_ok.php';
-  require 'functions/password_format.php';
+  require_once 'inc/functions.php';
 
   if ( empty( $oldpassword ) ) {
     $erreur['oldpassword'] = 'Ancien mot de passe manquant';
@@ -21,8 +20,8 @@ if ( !empty( $_POST ) ) {
   if ( empty( $newpassword ) ) {
     $erreur['newpassword'] = 'Nouveau mot de passe manquant';
   }
-  elseif ( !password_format( $newpassword ) ) {
-    $erreur['newpassword'] = 'Le nouveau mot de passe doit faire au moins 8 caractères et contenir des lettres et chiffres';
+  elseif ( strlen( $newpassword ) < 8 ) {
+    $erreur['newpassword'] = 'Le nouveau mot de passe doit faire au moins 8 caractères';
   }
 
   if ( empty( $newpasswordconf ) ) {
@@ -33,8 +32,6 @@ if ( !empty( $_POST ) ) {
   }
 
   if ( !$erreur ) {
-    require 'functions/password_save.php';
-
     password_save();
 
     $validation = 'Nouveau mot de passe enregistré !';
@@ -45,13 +42,13 @@ if ( !empty( $_POST ) ) {
 <html lang="fr">
   <head>
     <meta charset="utf-8">
-    <title>Inscription</title>
+    <title>Changer de mot de passe</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700,300">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php require 'header.php'; ?>
+    <?php require_once 'inc/header.php'; ?>
     <div class="container profil">
       <h1 class="text-xs-center">Changer de mot de passe</h1>
       <div class="row">
@@ -68,7 +65,7 @@ if ( !empty( $_POST ) ) {
           <?php if ( isset( $erreur['newpasswordconf'] ) ) : ?>
             <div class="alert alert-danger"><?= $erreur['newpasswordconf'] ?></div>
           <?php endif; ?>
-          <form action="password.php" method="post" class="p-y-3 p-x-2" novalidate>
+          <form action="password.php" method="post" class="p-y-3 p-x-2">
             <input type="password" name="oldpassword" class="form-control" placeholder="Ancien mot de passe">
             <input type="password" name="newpassword" class="form-control" placeholder="Nouveau mot de passe">
             <input type="password" name="newpasswordconf" class="form-control" placeholder="Confirmez le nouveau mot de passe">

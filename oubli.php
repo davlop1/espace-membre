@@ -7,7 +7,7 @@ if ( isset( $_SESSION['id'] ) ) {
 if ( !empty( $_POST ) ) {
   extract( $_POST );
 
-  require 'functions/mail_free.php';
+  require_once 'inc/functions.php';
 
   if ( empty( $email ) ) {
     $erreur = 'Adresse e-mail manquante';
@@ -15,23 +15,27 @@ if ( !empty( $_POST ) ) {
   elseif ( !filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
     $erreur = 'Adresse e-mail invalide';
   }
-  elseif ( !mail_free( $email ) ) {
+  elseif ( mail_free( $email ) ) {
     $erreur = 'Adresse e-mail inconnue';
   }
 
   if ( !isset( $erreur ) ) {
-    require 'functions/password_save.php';
-    require 'functions/mail_html.php';
-
     $password = bin2hex( random_bytes( 8 ) );
 
     password_save( $password );
 
-    $message = '<h1>Voici votre nouveau mot de passe :</h1><p>Mot de passe : <b>' . $password . '</b></p><p>Pensez à le changer lors de votre prochaine visite !</p>';
+    $message = '
+    <h1>Voici votre nouveau mot de passe :</h1>
+    <p>
+      Mot de passe : <b>' . $password . '</b><br>
+      Pensez à le changer lors de votre prochaine visite !
+    </p>
+    ';
 
     mail_html( $email, 'Nouveau mot de passe', $message );
 
     unset( $email );
+
     $validation = 'Nouveau mot de passe envoyé !';
   }
 }
@@ -46,7 +50,7 @@ if ( !empty( $_POST ) ) {
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <?php require 'header.php'; ?>
+    <?php require_once 'inc/header.php'; ?>
     <div class="container">
       <h1 class="text-xs-center">Mot de passe oublié</h1>
       <div class="row">
