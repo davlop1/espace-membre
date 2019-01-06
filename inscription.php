@@ -8,8 +8,8 @@ if (!empty($_POST)){
 if ( empty( $email)){
   $erreur['email'] = 'Adresse e-mail manquante';
 }
-elseif ( !filter_var( $email, FILTER_VALIDATE_EMAIl){
-  $erreur['email'] = 'Adresse e-mail déjà prise';
+elseif ( !filter_var( $email, FILTER_VALIDATE_EMAIl)){
+  $erreur['email'] = 'Adresse e-mail invalide';
 }
 if ( empty($password)) {
   $erreur['password'] = 'Mot de passe manquant';
