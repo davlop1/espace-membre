@@ -8,10 +8,7 @@ if (!empty($_POST)){
 if ( empty( $email)){
   $erreur['email'] = 'Adresse e-mail manquante';
 }
-elseif ( !filter_var( $email, FILTER_VALIDATE_EMAIL)){
-  $erreur['email'] = 'Adresse e-mail invalide';
-}
-elseif ( !mail_free()) {
+elseif ( !filter_var( $email, FILTER_VALIDATE_EMAIl){
   $erreur['email'] = 'Adresse e-mail déjà prise';
 }
 if ( empty($password)) {
@@ -29,7 +26,7 @@ if ( empty( $passwordconf)){
  }
 
  if (!$erreur){
-   //insertion du nouveau membre en BDD
+   //insertion du nouveau membre en dbb
 
    unset($email);
 
